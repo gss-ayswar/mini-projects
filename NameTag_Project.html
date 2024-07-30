@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAME TAG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <template id="template">
+        <div class="container">
+            <div class="text">Hi</div>
+            <div class="subText">My name is</div>
+            <div class="name"></div>
+            <div class="bottom"></div>
+        </div>
+    </template>
+    <div class="wrapper"></div>
+    <script src="script.js"></script>
+</body>
+</html>
+<style>
+    * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: cursive;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(65, 101, 12, 1) 35%,
+        rgba(0, 24, 89, 1) 100%
+    );
+    overflow: hidden;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.container {
+    width: 300px;
+    height: 200px;
+    display: inline-block;
+    border-radius: 20px;
+    border: 5px solid #4a90e2;
+    background: #87ceeb;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.text {
+    font-weight: 900;
+    font-size: 35px;
+    line-height: 48px;
+}
+
+.subText {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 14px;
+}
+
+.name {
+    height: 100px;
+    background: #fff;
+    font-size: 45px;
+    text-align: center;
+    overflow: hidden;
+    max-width: 300px;
+    transition: background 0.3s ease-in-out;
+}
+
+.bottom {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+}
+
+</style>
+<script>
+    let wrapper = document.querySelector(".wrapper");
+let template = document.querySelector("#template"); // Select template by ID
+
+let names = ["Vijay", "Shaurya", "Ajay"];
+
+let colors = [
+    "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF", "#800000",
+    "#8B0000", "#FFA500", "#FFD700", "#6B8E23", "#7CFC00", "#000080", "#8B008B",
+    "#FF00FF", "#F4A460", "#FF3855", "#FD3A4A", "#FB4D46", "#FA5B3D", "#FFAA1D",
+    "#FFF700", "#299617", "#A7F432", "#2243B6", "#5DADEC", "#5946B2", "#9C51B6",
+];
+
+function createSticker(name) {
+    let instance = document.importNode(template.content, true);
+    let div = instance.querySelector(".container");
+
+    div.querySelector(".name").textContent = name;
+    div.style.background = colors[Math.floor(Math.random() * colors.length)];
+    div.style.transform = "rotate(" + (Math.random() * 40 - 20) + "deg)";
+
+    wrapper.appendChild(instance);
+}
+
+function refreshStickers() {
+    wrapper.innerHTML = ""; // Clear existing stickers
+    names.forEach(createSticker); // Create new stickers
+}
+
+// Initial creation of stickers
+names.forEach(createSticker);
+
+// Optionally, refresh stickers periodically
+setInterval(refreshStickers, 1000); // Refresh every 1 second (for testing purposes)
+
+
+</script>

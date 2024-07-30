@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+</head>
+<body>
+    <h1>DRAG AND DROP PROJECT</h1>
+    <div class="container">
+      <div class="box one" draggable="true"></div>
+      <div class="box two" draggable="true"></div>
+      <div class="box three" draggable="true"></div>
+      <div class="box four" draggable="true"></div>
+      <div class="box five" draggable="true"></div>
+      <div class="box six" draggable="true"></div>
+      <div class="box seven" draggable="true"></div>
+      <div class="box eight" draggable="true"></div>
+      <div class="box nine" draggable="true"></div>
+      <div class="box ten" draggable="true"></div>
+      <div class="box eleven" draggable="true"></div>
+      <div class="box twelve" draggable="true"></div>
+    </div>
+</body>
+</html>
+<style>
+    *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #333;
+}
+
+h1{
+    margin: 1rem;
+    color: #fff;
+    font-size: 2.5rem;
+    margin-top: 0rem;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    margin: 0 auto;
+    background: linear-gradient(90deg, #3498db,#e74c3c);
+    flex-wrap: wrap;
+}
+
+.box{
+    width: 10vw;
+    height: 10vh;
+    cursor: move;
+    position: relative;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.box:hover{
+    background: linear-gradient(90deg,#2980b9,#c0392b);
+}
+
+.one{
+    background-color: #3498db;  /* Blue Purple */
+}
+
+.two{
+    background-color: #e74c3c;  /* Red Purple */
+}
+
+.three {
+    background-color: #4b0082; /* Dark Purple */
+  }
+  
+  .four {
+    background-color: #8b4513; /* Saddle Brown */
+  }
+  
+  .five {
+    background-color: #20b2aa; /* Light Sea Green */
+  }
+  
+  .six {
+    background-color: #00ff00; /* Lime Green */
+  }
+  
+  .seven {
+    background-color: #800000; /* Maroon */
+  }
+  
+  .eight {
+    background-color: #ffa500; /* Orange */
+  }
+  
+  .nine {
+    background-color: #ff0000; /* Red */
+  }
+  
+  .ten {
+    background-color: #40e0d0; /* Turquoise */
+  }
+  
+  .eleven {
+    background-color: #f0e68c; /* Khaki */
+  }
+  
+  .twelve {
+    background-color: #ffff00; /* Yellow */
+  }
+  
+  
+</style>
+<script>
+    function drag(){
+
+let dragging = false;
+let mouseX, mouseY;
+let eleX, eleY;
+
+const boxes = document.querySelectorAll("[draggable]");
+
+boxes.forEach(box =>{
+     box.addEventListener('mousedown',mouseDown); 
+     box.style.top = 0;
+     box.style.left = 0;
+});
+
+function mouseDown(e){
+    e.preventDefault();
+    
+    dragging = this;
+
+    mouseX = e.pageX;
+    mouseY = e.pageY;
+
+    eleX = Number.parseInt(dragging.style.left);
+    eleY = Number.parseInt(dragging.style.top);
+
+    document.addEventListener("mousemove",mouseMove);
+    document.addEventListener("mouseup",mouseUp);
+}
+
+function mouseMove(e){
+    if(dragging){
+        const deltaMouseX = e.pageX - mouseX;
+        const deltaMouseY = e.pageY - mouseY;
+
+        dragging.style.left = deltaMouseX + eleX + "px";
+        dragging.style.top = deltaMouseY + eleY + "px";
+
+    }
+}
+
+function mouseUp(e){
+    dragging = false;
+}
+
+}
+
+drag();
+</script>

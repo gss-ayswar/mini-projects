@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visible Letters</title>
+</head>
+<body>
+    <div id="w">
+        <span>W</span>
+    </div>
+    <div id="a">
+        <span>A</span>
+    </div>
+    <div id="r">
+        <span>R</span>
+    </div>
+    <div id="b">
+        <span>B</span>
+    </div>
+    <div id="ru">
+        <span>R</span>
+    </div>
+    <div id="o">
+        <span>O</span>
+    </div>
+    <div id="s">
+        <span>S</span>
+    </div>
+    <div id="complete">
+        <span>WARBROS</span>
+    </div>
+</body>
+</html>
+<style>
+    *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    user-select: none;
+    font-family: cursive;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #1a237e,#ff1744);
+}
+
+div{
+    text-align: center;
+    font-size: 15rem;
+}
+
+#i,#j,#a,#y,#complete{
+    display: none;
+}
+
+</style>
+<script>
+const w = document.getElementById("w")
+const a = document.getElementById("a")
+const r = document.getElementById("r")
+const b = document.getElementById("b")
+const ru = document.getElementById("ru")
+const o = document.getElementById("o")
+const s = document.getElementById("s")
+const warbros = document.getElementById("complete")
+
+w.addEventListener("click",()=>{
+    w.style.display = "none";
+    a.style.display = "block";
+});
+
+a.addEventListener("click",()=>{
+    a.style.display = "none";
+    r.style.display = "block";
+});
+
+r.addEventListener("click",()=>{
+    r.style.display = "none";
+    b.style.display = "block";
+});
+
+b.addEventListener("click",()=>{
+    b.style.display = "none";
+    ru.style.display = "block";
+});
+
+ru.addEventListener("click",()=>{
+    ru.style.display = "none";
+    o.style.display = "block";
+});
+
+o.addEventListener("click",()=>{
+    o.style.display = "none";
+    s.style.display = "block";
+});
+
+s.addEventListener("click",()=>{
+    s.style.display = "none";
+    warbros.style.display = "block";
+});
+
+warbros.addEventListener("click",()=>{
+    warbros.style.display = "none";
+    w.style.display = "block";
+});
+
+
+
+</script>

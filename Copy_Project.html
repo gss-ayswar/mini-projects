@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy to Clipboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            flex-direction: column;
+            background: linear-gradient(
+                145deg,
+                rgb(43, 246, 185),
+                rgb(92, 119, 240),
+                rgb(167, 13, 167),
+                rgb(237, 22, 151),
+                rgb(64, 92, 249),
+                rgb(176, 13, 201)
+            );
+            background-size: 200%;
+            animation: backgroundPro 20s infinite;
+        }
+
+        @keyframes backgroundPro {
+            0% {
+                background-position: 0;
+            }
+            50% {
+                background-position: 100%;
+            }
+            100% {
+                background-position: 0;
+            }
+        }
+
+        h3, button {
+            padding: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: ghostwhite;
+        }
+
+        button {
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            border-radius: 2px;
+            background-color: #4CAF50;
+            color: #fff;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #117d9e;
+            color: #e4f316;
+        }
+
+        .message {
+            margin: 1rem;
+            padding: 1rem;
+            background-color: greenyellow;
+            color: #000;
+            border-radius: 5px;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+
+        .after-clicked {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h3 id="main_paragraph">Click this button so that you can copy</h3>
+    <button id="copy">Copy to Clipboard</button>
+    <p id="message" class="message">Text copied to Clipboard</p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const button = document.getElementById("copy");
+            const mainParagraph = document.getElementById("main_paragraph");
+            const message = document.getElementById("message");
+
+            function copyToClipboard(element) {
+                navigator.clipboard.writeText(element.textContent)
+                    .then(() => {
+                        console.log("Text copied to clipboard");
+                        message.textContent = "Copied to clipboard";
+                        message.classList.add("after-clicked");
+                    })
+                    .catch((err) => {
+                        console.log("Unable to Copy the Data", err);
+                    })
+                    .finally(() => {
+                        setTimeout(() => {
+                            message.textContent = "";
+                            message.classList.remove("after-clicked");
+                        }, 2000);
+                    });
+            }
+
+            button.addEventListener("click", () => copyToClipboard(mainParagraph));
+        });
+    </script>
+</body>
+</html>

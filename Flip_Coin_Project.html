@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COIN FLIP APPLICATION</title>
+</head>
+<body>
+    <div class="container">
+        <div id="coin" class="">
+            <div id="heads" class="headsClass"></div>
+            <div id="tails" class="tailsClass"></div>
+        </div>
+        <button id="flip">Flip the coin</button>
+        <p>Heads:<span id="headsCount">0</span></p>
+        <p>Tails:<span id="tailsCount">0</span></p>
+        <p><span id="status"></span></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+<style>
+    
+body{
+
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background: linear-gradient(to right, rgb(242,112,156), rgb(255,148,114));
+}
+
+.container{
+margin: auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+button{
+padding: 1rem;
+background-color: skyblue;
+}
+
+#coin{
+position: relative;
+width: 15rem;
+height: 15rem;
+margin: 2rem 0rem;
+transform-style: preserve-3d;
+}
+
+#coin div{
+width: 100%;
+height: 100%;
+border: 2px solid black;
+border-radius: 50%;
+backface-visibility: hidden;
+background-size: contain;
+position: absolute;
+}
+
+.headsClass{
+background-image: url("https://tse2.mm.bing.net/th?id=OIP.hn2gZV90k3POf8JlWA5EgwHaHa&pid=Api&P=0&h=180");
+}
+
+.animate-heads{
+animation: flipHeads 3s;
+animation-fill-mode: forwards;
+}
+
+@keyframes flipHeads {
+
+from{
+    transform: rotateY(0deg);
+}
+
+to{
+    transform: rotateY(1800deg);
+}
+
+}
+
+.tailsClass{
+background-image: url("https://tse4.mm.bing.net/th?id=OIP.ZPMP9dEmC4Dl0oUM35Eo2QAAAA&pid=Api&P=0&h=180");
+
+transform: rotateY(-180deg);
+
+}
+
+.animate-tails{
+animation: flipTails 3s;
+animation-fill-mode: forwards;
+}
+
+@keyframes flipTails {
+
+from{
+    transform: rotateY(0deg);
+}
+
+to{
+    transform: rotateY(1620deg);
+}
+
+}
+</style>
+<script>
+    
+const coin = document.querySelector("#coin");
+const button = document.querySelector("#flip");
+const statusLabel = document.querySelector("#status");
+const heads = document.querySelector("#headsCount");
+const tails = document.querySelector("#tailsCount");
+
+
+
+let headsCount = 0;
+let tailsCount = 0;
+
+function processResult(result){
+
+    if(result === 'heads'){
+        headsCount++;
+        heads.innerHTML = headsCount;
+    }else{
+        tailsCount++;
+        tails.innerHTML = tailsCount;
+    }
+
+    statusLabel.innerText = result.toUpperCase();
+}
+
+
+function flipCoin(){
+
+    const random = Math.random();
+    const result = random < 0.5 ? 'heads' : 'tails';
+
+    setTimeout(() => {
+            coin.setAttribute('class','animate-' + result);
+
+            setTimeout(() => {
+                    processResult(result);
+            }, 2900);
+
+    }, 100);
+}
+
+button.addEventListener("click",flipCoin);
+</script>
